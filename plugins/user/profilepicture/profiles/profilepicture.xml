@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<form>
+	<fields name="profilepicture">
+		<fieldset name="profilepicture"
+			label="PLG_USER_PROFILEPICTURE_SLIDER_LABEL"
+			addfieldpath="/plugins/user/profilepicture/elements"
+		>
+			<field
+				name="file" 
+		        	type="profilepicture"
+				id="file"
+				description="PLG_USER_PROFILEPICTURE_FIELD_PICTURE_DESC"
+				filter=""
+				label="PLG_USER_PROFILEPICTURE_FIELD_PICTURE_LABEL"
+				message="PLG_USER_PROFILEPICTURE_FIELD_PICTURE_MESSAGE"
+				size=""
+		        />
+		</fieldset>
+	</fields>
+</form>
