@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="library" version="1.0" method="upgrade">
+	<name>lib_mosets_profilepicture</name>
+	<libraryname>mosets</libraryname>
+	<description>LIB_MOSETS_PROFILEPICTURE_XML_DESCRIPTION</description>
+	<creationDate>January 2012</creationDate>
+	<author>CY Lee</author>
+	<authorEmail>mtree@mosets.com</authorEmail>
+	<authorUrl>http://www.mosets.com/</authorUrl>
+	<copyright>(C) 2012 CY Lee</copyright>
+	<license>MIT License</license>
+	<version>1.0</version>
+	<packager>CY Lee</packager>
+	<packagerurl>http://www.mosets.com</packagerurl>
+	<updateservers>http://update.mosets.com/libraries/mosets_profilepicture/profilepicture.xml</updateservers>
+	<files>
+		<filename>index.html</filename>
+		<folder>profilepicture</folder>
+	</files>
+</extension>
