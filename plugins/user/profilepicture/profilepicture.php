@@ -1,7 +1,6 @@
 <?php
 /**
- * @version	$Id$
- * @copyright	Copyright (C) 2011 Mosets Consulting, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2012 Mosets Consulting, Inc. All rights reserved.
  * @license	GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,24 +19,6 @@ jimport('mosets.profilepicture.profilepicture');
 class plgUserProfilePicture extends JPlugin
 {
 	/**
-	 * @const  integer
-	 * @since  1.0
-	 */
-	// const SIZE_ORIGINAL = 'original';
-	
-	/**
-	 * @const  integer
-	 * @since  1.0
-	 */
-	// const SIZE_50 = 50;
-	
-	/**
-	 * @const  integer
-	 * @since  1.0
-	 */
-	// const SIZE_200 = 200;
-	
-	/**
 	 * @const  string
 	 * @since  1.0
 	 */
@@ -51,9 +32,6 @@ class plgUserProfilePicture extends JPlugin
 				PROFILEPICTURE_SIZE_ORIGINAL,
 				PROFILEPICTURE_SIZE_50,
 				PROFILEPICTURE_SIZE_200
-				// PROFILEPICTURE_SIZE_ORIGINAL,
-				// PROFILEPICTURE_SIZE_50,
-				// PROFILEPICTURE_SIZE_200
 				);
 
 	/**

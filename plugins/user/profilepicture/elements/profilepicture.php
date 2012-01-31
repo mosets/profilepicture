@@ -36,9 +36,6 @@ class JFormFieldProfilePicture extends JFormField
 	 * @return  string  The field input markup.
 	 *
 	 * @since   1.0
-	 *
-	 * @note    The field does not include an upload mechanism.
-	 * @see     JFormFieldMedia
 	 */
 	protected function getInput()
 	{
@@ -51,7 +48,6 @@ class JFormFieldProfilePicture extends JFormField
 		// Initialize JavaScript field attributes.
 		$onchange = $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
 		
-		//
 		$profilepicture = '';
 		$remove_pp = '';
 
