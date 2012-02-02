@@ -23,6 +23,11 @@ Here's an example code that displays the currently logged in user's profile pict
 		echo '<img src="'.$profilepicture->getURL().'" alt="'.$user->get('name').'" />';
 	}
 
+Requirements
+------------
+
+Joomla 2.5 and GD image library support for PHP.
+
 Author
 -------
 
