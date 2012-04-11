@@ -131,7 +131,7 @@ class plgUserProfilePicture extends JPlugin
 		}
 
 		// Save original picture, resize and save it
-		if( $files['error']['profilepicture']['file'] == 0 )
+		if($files['error']['profilepicture']['file'] == 0 && isset($files['name']['profilepicture']['file']) && (!empty($files['name']['profilepicture']['file'])))
 		{
 			$profilepicture = new JImage($files['tmp_name']['profilepicture']['file']);
 
