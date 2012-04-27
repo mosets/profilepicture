@@ -130,11 +130,7 @@ class plgUserProfilePicture extends JPlugin
 		$files	= JRequest::getVar( 'jform', null, 'files');
 		$post	= JRequest::getVar( 'jform', null);
 		
-		// Remove profile picture
-		if( !empty($post['profilepicture']['file']['remove']) && isset($userId) ) 
-		{
-			$this->removeProfilePicture($userId);
-		}
+		$savedNewProfilePicture = false;
 
 		// Save original picture, resized pictures and save them
 		if( $files['error']['profilepicture']['file'] == 0 )
@@ -158,6 +154,7 @@ class plgUserProfilePicture extends JPlugin
 				if($size == PROFILEPICTURE_SIZE_ORIGINAL)
 				{
 					$profilepicture->toFile(PROFILEPICTURE_PATH_ORIGINAL.$pp_filename);
+					$savedNewProfilePicture = true;
 				}
 				else
 				{
@@ -191,31 +188,42 @@ class plgUserProfilePicture extends JPlugin
 						$resized = $cropped->resize($resizedWidth, $resizedHeight, true, JImage::SCALE_OUTSIDE);
 						$resized->toFile(constant('PROFILEPICTURE_PATH_'.$size).$pp_filename);
 
+						$savedNewProfilePicture = true;
 					}
 					else
 					{
 						$resized = $profilepicture->resize($size, $size, true, JImage::SCALE_INSIDE);
 						$resized->toFile(constant('PROFILEPICTURE_PATH_'.$size).$pp_filename);
+
+						$savedNewProfilePicture = true;
 					}
 				}
 			}
 		}
 
-		if ($userId && $result && isset($files['name']['profilepicture']['file']) && (!empty($files['name']['profilepicture']['file'])))
+		
+		// Remove profile picture if an existing profile picture is 
+		// checked for removal or a new picture has been uploaded
+		// replacing the existing picture.
+		if( 
+			isset($userId)
+			&&
+			(
+				!empty($post['profilepicture']['file']['remove'])
+				||
+				$savedNewProfilePicture
+			)
+		) 
+		{
+			$this->removeProfilePicture($userId);
+		}
+
+		if( $userId && $savedNewProfilePicture )
 		{
 			try
 			{
 				$db = JFactory::getDbo();
 				$query	= $db->getQuery(true);
-				
-				$query->delete('#__user_profiles')
-					->where('user_id = '.$userId)
-					->where('profile_key = '.$db->quote(plgUserProfilePicture::PROFILE_KEY));
-				$db->setQuery($query);
-
-				if (!$db->query()) {
-					throw new Exception($db->getErrorMsg());
-				}
 
 				$query	= $db->getQuery(true);
 				$query->insert('#__user_profiles')
@@ -227,10 +235,12 @@ class plgUserProfilePicture extends JPlugin
 						.' 1');
 				$db->setQuery($query);
 
-				if (!$db->query()) {
+				if (!$db->query())
+				{
 					throw new Exception($db->getErrorMsg());
 				}
 			}
+			
 			catch (JException $e)
 			{
 				$this->_subject->setError($e->getMessage());
@@ -264,7 +274,11 @@ class plgUserProfilePicture extends JPlugin
 	/**
 	 * Remove profile picture's file and table record
 	 *
-	 * @param	int		$userId		User ID
+	 * @param	int	$userId		User ID
+	 * 
+	 * @return 	boolean	true if successfully removed profile picture.
+	 * 			false if failed or there is no profile picture 
+	 * 			to remove.
 	 */
 	function removeProfilePicture($userId)
 	{
@@ -282,28 +296,37 @@ class plgUserProfilePicture extends JPlugin
 
 				$db->setQuery($query, 0, 1);
 				$profile_value = $db->loadResult();
-
-				jimport('joomla.filesystem.file');
-				foreach( $this->sizes AS $size )
+				
+				if( !empty($profile_value) )
 				{
-					if($size == PROFILEPICTURE_SIZE_ORIGINAL)
+					jimport('joomla.filesystem.file');
+					foreach( $this->sizes AS $size )
 					{
-						JFile::delete(PROFILEPICTURE_PATH_ORIGINAL.$profile_value);
-					} else {
-						JFile::delete(constant('PROFILEPICTURE_PATH_'.$size).$profile_value);
+						if($size == PROFILEPICTURE_SIZE_ORIGINAL)
+						{
+							JFile::delete(PROFILEPICTURE_PATH_ORIGINAL.$profile_value);
+						} else {
+							JFile::delete(constant('PROFILEPICTURE_PATH_'.$size).$profile_value);
+						}
 					}
-				}
-				
-				$query	= $db->getQuery(true);
-				
-				$query->delete('#__user_profiles')
-					->where('user_id = '.$userId)
-					->where('profile_key = '.$db->quote(plgUserProfilePicture::PROFILE_KEY));
-				$db->setQuery($query);
 
-				if (!$db->query()) {
-					throw new Exception($db->getErrorMsg());
+					$query	= $db->getQuery(true);
+
+					$query->delete('#__user_profiles')
+						->where('user_id = '.$userId)
+						->where('profile_key = '.$db->quote(plgUserProfilePicture::PROFILE_KEY));
+					$db->setQuery($query);
+
+					if (!$db->query())
+					{
+						throw new Exception($db->getErrorMsg());
+					}					
 				}
+				else
+				{
+					return false;
+				}
+
 			}
 			catch (JException $e)
 			{
