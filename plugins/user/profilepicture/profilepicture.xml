@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="1.0" type="plugin" group="user">
+<extension version="1.0" type="plugin" group="user" method="upgrade">
 	<name>PLG_USER_PROFILEPICTURE</name>
 	<author>Mosets Consulting</author>
 	<creationDate>April 2012</creationDate>
