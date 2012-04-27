@@ -25,6 +25,12 @@ class plgUserProfilePicture extends JPlugin
 	const PROFILE_KEY = 'profilepicture.file';
 	
 	/**
+	 * @var    boolean  True, to crop picture so that they are square.
+	 * @since  1.0
+	 */
+	protected $square = true;
+
+	/**
 	 * @var    array  The list of sizes that will be saved.
 	 * @since  1.0
 	 */
@@ -130,15 +136,17 @@ class plgUserProfilePicture extends JPlugin
 			$this->removeProfilePicture($userId);
 		}
 
-		// Save original picture, resize and save it
+		// Save original picture, resized pictures and save them
 		if( $files['error']['profilepicture']['file'] == 0 )
 		{
 			$profilepicture = new JImage($files['tmp_name']['profilepicture']['file']);
-
+			$sourceWidth = $profilepicture->getWidth();
+			$sourceHeight = $profilepicture->getHeight();
+			
 			if( 
-				$profilepicture->getWidth() < PROFILEPICTURE_SIZE_200
+				$sourceWidth < PROFILEPICTURE_SIZE_200
 				||
-				$profilepicture->getHeight() < PROFILEPICTURE_SIZE_200
+				$sourceHeight < PROFILEPICTURE_SIZE_200
 			) {
 				throw new Exception(JText::_('PLG_USER_PROFILEPICTURE_ERROR_TOO_SMALL'));
 			}
@@ -150,9 +158,45 @@ class plgUserProfilePicture extends JPlugin
 				if($size == PROFILEPICTURE_SIZE_ORIGINAL)
 				{
 					$profilepicture->toFile(PROFILEPICTURE_PATH_ORIGINAL.$pp_filename);
-				} else {
-					$resized = $profilepicture->resize($size, $size, true, JImage::SCALE_INSIDE);
-					$resized->toFile(constant('PROFILEPICTURE_PATH_'.$size).$pp_filename);
+				}
+				else
+				{
+					$ratio = max($sourceWidth, $sourceHeight) / $size;
+					$ratio = max($ratio, 1.0);
+					$resizedWidth = (int)($sourceWidth / $ratio);
+					$resizedHeight = (int)($sourceHeight / $ratio);
+					$left = 0;
+					$top = 0;
+					
+					if($this->square && $sourceWidth > $size && $sourceHeight > $size)
+					{
+						if($sourceWidth > $sourceHeight)
+						{
+							$left = (int)($sourceWidth - $sourceHeight) / 2;
+							$top = 0;
+							$croppedWidth = $sourceHeight;
+							$croppedHeight = $sourceHeight;
+							$resizedHeight = $resizedWidth;
+						}
+						elseif($sourceHeight > $sourceWidth)
+						{
+							$left = 0;
+							$top = (int)(($sourceHeight - $sourceWidth) / 2);
+							$croppedWidth = $sourceWidth;
+							$croppedHeight = $sourceWidth;
+							$resizedWidth = $resizedHeight;
+						}
+
+						$cropped = $profilepicture->crop($croppedWidth, $croppedHeight, $left, $top, true);
+						$resized = $cropped->resize($resizedWidth, $resizedHeight, true, JImage::SCALE_OUTSIDE);
+						$resized->toFile(constant('PROFILEPICTURE_PATH_'.$size).$pp_filename);
+
+					}
+					else
+					{
+						$resized = $profilepicture->resize($size, $size, true, JImage::SCALE_INSIDE);
+						$resized->toFile(constant('PROFILEPICTURE_PATH_'.$size).$pp_filename);
+					}
 				}
 			}
 		}
@@ -182,7 +226,7 @@ class plgUserProfilePicture extends JPlugin
 						.$db->quote($pp_filename).', '
 						.' 1');
 				$db->setQuery($query);
-			 
+
 				if (!$db->query()) {
 					throw new Exception($db->getErrorMsg());
 				}
@@ -193,6 +237,7 @@ class plgUserProfilePicture extends JPlugin
 				return false;
 			}
 		}
+
 		return true;
 	}
 
