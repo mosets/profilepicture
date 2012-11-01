@@ -14,7 +14,6 @@
 	<packagerurl>http://www.mosets.com</packagerurl>
 	<updateservers>http://update.mosets.com/libraries/mosets_profilepicture/profilepicture.xml</updateservers>
 	<files>
-		<filename>index.html</filename>
 		<folder>profilepicture</folder>
 	</files>
 </extension>
