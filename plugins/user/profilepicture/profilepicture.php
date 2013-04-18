@@ -175,7 +175,7 @@ class plgUserProfilePicture extends JPlugin
 							$croppedHeight = $sourceHeight;
 							$resizedHeight = $resizedWidth;
 						}
-						elseif($sourceHeight > $sourceWidth)
+						elseif($sourceHeight >= $sourceWidth)
 						{
 							$left = 0;
 							$top = (int)(($sourceHeight - $sourceWidth) / 2);
