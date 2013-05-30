@@ -167,7 +167,7 @@ class plgUserProfilePicture extends JPlugin
 					
 					if($this->square && $sourceWidth > $size && $sourceHeight > $size)
 					{
-						if($sourceWidth > $sourceHeight)
+						if($sourceWidth >= $sourceHeight)
 						{
 							$left = (int)($sourceWidth - $sourceHeight) / 2;
 							$top = 0;
