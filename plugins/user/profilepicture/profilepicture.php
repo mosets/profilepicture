@@ -133,7 +133,7 @@ class plgUserProfilePicture extends JPlugin
 		$savedNewProfilePicture = false;
 
 		// Save original picture, resized pictures and save them
-		if( $files['error']['profilepicture']['file'] == 0 )
+		if( $files['error']['profilepicture']['file'] == 0 && !empty($files['tmp_name']['profilepicture']['file']) )
 		{
 			$profilepicture = new JImage($files['tmp_name']['profilepicture']['file']);
 			$sourceWidth = $profilepicture->getWidth();
