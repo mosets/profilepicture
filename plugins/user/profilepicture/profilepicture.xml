@@ -20,7 +20,6 @@
 		<filename>index.html</filename>
 	</files>
 	<media folder="media/plg_user_profilepicture" destination="plg_user_profilepicture">
-		<filename>index.html</filename>
 		<folder>images</folder>
 	</media>
 </extension>
