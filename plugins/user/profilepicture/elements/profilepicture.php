@@ -52,7 +52,7 @@ class JFormFieldProfilePicture extends JFormField
 		$remove_pp = '';
 
 		if( !empty($this->value) ) {
-			$path = JURI::root().'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'200'.DS.$this->value;
+			$path = JURI::root().'media/plg_user_profilepicture/images/200/'.$this->value;
 			$profilepicture = '<img src="'.$path.'" style="float:left;clear:left;margin:6px 0" />';
 			
 			$remove_pp = '<input type="checkbox" id="'.$this->id.'remove" name="'.$this->name.'[remove]" value="'.$this->value.'" style="float:left;clear:left;width:auto" />';

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="dist/build/lib_mosets_profilepicture-1.0.0/profilepicture"/>
+	<buildpathentry kind="src" path="dist/build/plg_user_profilepicture-1.1.0"/>
+	<buildpathentry kind="src" path="libraries/mosets/profilepicture"/>
+	<buildpathentry kind="src" path="plugins/user/profilepicture"/>
+	<buildpathentry kind="lib" path="dist/build/lib_mosets_profilepicture-1.0.0.zip"/>
+	<buildpathentry kind="lib" path="dist/build/plg_user_profilepicture-1.1.0.zip"/>
+	<buildpathentry kind="lib" path="dist/pkg_profilepicture-1.1.0.zip"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
