@@ -2,12 +2,12 @@
 <extension version="1.0" type="plugin" group="user" method="upgrade">
 	<name>PLG_USER_PROFILEPICTURE</name>
 	<author>Mosets Consulting</author>
-	<creationDate>April 2012</creationDate>
+	<creationDate>June 2015</creationDate>
 	<copyright>(C) 2012 Mosets Consulting. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>mtree@mosets.com</authorEmail>
 	<authorUrl>www.mosets.com</authorUrl>
-	<version>1.1.0</version>
+	<version>2.0.0</version>
 	<description>PLG_USER_PROFILEPICTURE_XML_DESCRIPTION</description>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.plg_user_profilepicture.ini</language>
@@ -23,4 +23,16 @@
 		<filename>index.html</filename>
 		<folder>images</folder>
 	</media>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="maxUploadSizeInBytes" type="text"
+                       class=""
+                       default="800000"
+                       description="PLG_USER_PROFILEPICTURE_FIELD_MAXUPLOADSIZEINBYTES_DESC"
+                       label="PLG_USER_PROFILEPICTURE_FIELD_MAXUPLOADSIZEINBYTES_LABEL"
+                        />
+            </fieldset>
+        </fields>
+    </config>
 </extension>

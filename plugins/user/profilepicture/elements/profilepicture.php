@@ -29,6 +29,22 @@ class JFormFieldProfilePicture extends JFormField
 	public $type = 'ProfilePicture';
 
 	/**
+	 * The Profile Picture plugin parameter
+	 *
+	 * @var    JRegistry
+	 * @since  1.0
+	 */
+	public $params;
+
+	/**
+	 * The Profile Picture plugin parameter
+	 *
+	 * @var    Integer
+	 * @since  1.0
+	 */
+	public $maxUploadSizeInBytes;
+
+	/**
 	 * The inline CSS style for IMG element
 	 *
 	 * @var    string
@@ -51,6 +67,23 @@ class JFormFieldProfilePicture extends JFormField
 	 * @since  2.0
 	 */
 	public $inlineStyleInput = 'float:left;clear:left;width:auto';
+
+	/**
+	 * Override by loading Profile Picture parameters.
+	 *
+	 * @param   JForm  $form  The form to attach to the form field object.
+	 *
+	 * @since   2.0
+	 */
+	public function __construct($form = null)
+	{
+		$plugin = JPluginHelper::getPlugin('user', 'profilepicture');
+		$this->params = new JRegistry($plugin->params);
+
+		$this->maxUploadSizeInBytes = $this->params->get('maxUploadSizeInBytes', 800000);
+
+		parent::__construct($form);
+	}
 
 	/**
 	 * Method to get the field input markup for the file field.
@@ -115,7 +148,21 @@ class JFormFieldProfilePicture extends JFormField
 			$remove_pp .= '</label>';
 		}
 
+		$message = '<p>';
+		$message .= JText::sprintf('PLG_USER_PROFILEPICTURE_FIELD_MAXUPLOADSIZEINBYTES_MESSAGE', $this->maxUploadSizeInKB());
+		$message .= '</p>';
+
 		return '<input type="file" name="' . $this->name . '" id="' . $this->id . '"' . ' value=""' . $accept . $disabled . $class . $size
-			. $onchange . ' />'.$profilepicture.$remove_pp;
+			. $onchange . ' />'.$message.$profilepicture.$remove_pp;
+	}
+
+	/**
+	 * Return the configured parameter for maximum allowed uploaded file size.
+	 *
+	 * @return    int
+	 * @since    2.0
+	 */	protected function maxUploadSizeInKB()
+	{
+		return $this->maxUploadSizeInBytes / 1000;
 	}
 }

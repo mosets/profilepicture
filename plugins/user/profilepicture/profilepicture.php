@@ -124,17 +124,52 @@ class plgUserProfilePicture extends JPlugin
 		return true;
 	}
 
+	/**
+	 * Return the configured parameter for maximum allowed uploaded file size.
+	 *
+	 * @return    int
+	 * @since    2.0
+	 */
+	protected function maxUploadSizeInBytes()
+	{
+		return $this->params->get('maxUploadSizeInBytes', 800000);
+	}
+
+	/**
+	 * Check if the given file size exceeds the maxUploadSizeInBytes parameter.
+	 *
+	 * @param $bytes File size in bytes.
+	 *
+	 * @return    boolean
+	 * @since    2.0
+	 */
+	protected function doesExceedFileSizeLimit($bytes)
+	{
+		if( $bytes > $this->maxUploadSizeInBytes() ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	function onUserAfterSave($data, $isNew, $result, $error)
 	{
 		$userId	= JArrayHelper::getValue($data, 'id', 0, 'int');
 		$files	= JRequest::getVar( 'jform', null, 'files');
 		$post	= JRequest::getVar( 'jform', null);
-		
+
 		$savedNewProfilePicture = false;
 
 		// Save original picture, resized pictures and save them
 		if( $files['error']['profilepicture']['file'] == 0 && !empty($files['tmp_name']['profilepicture']['file']) )
 		{
+
+			// Throw new exception if the uploaded file exceed the maximum allowed file size.
+			if ( $this->doesExceedFileSizeLimit($files['size']['profilepicture']['file']) )
+			{
+				throw new Exception(JText::sprintf('PLG_USER_PROFILEPICTURE_ERROR_FILE_SIZE_TOO_BIG', ($this->maxUploadSizeInBytes()/1000)));
+			}
+
 			$profilepicture = new JImage($files['tmp_name']['profilepicture']['file']);
 			$sourceWidth = $profilepicture->getWidth();
 			$sourceHeight = $profilepicture->getHeight();
