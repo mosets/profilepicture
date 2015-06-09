@@ -2,6 +2,7 @@
 /.htaccess
 /administrator
 /components
+/dist
 /images
 /language
 /layouts

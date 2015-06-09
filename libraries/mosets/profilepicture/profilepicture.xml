@@ -9,7 +9,7 @@
 	<authorUrl>http://www.mosets.com/</authorUrl>
 	<copyright>(C) 2012 CY Lee</copyright>
 	<license>MIT License</license>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<packager>CY Lee</packager>
 	<packagerurl>http://www.mosets.com</packagerurl>
 	<updateservers>http://update.mosets.com/libraries/mosets_profilepicture/profilepicture.xml</updateservers>
