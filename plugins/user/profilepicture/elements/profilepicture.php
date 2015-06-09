@@ -3,7 +3,7 @@
  * @package     Mosets
  * @subpackage  Profile Picture
  *
- * @copyright   Copyright (C) 2012 Mosets Consulting, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2012-presemt Mosets Consulting, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -27,6 +27,30 @@ class JFormFieldProfilePicture extends JFormField
 	 * @since  1.0
 	 */
 	public $type = 'ProfilePicture';
+
+	/**
+	 * The inline CSS style for IMG element
+	 *
+	 * @var    string
+	 * @since  2.0
+	 */
+	public $inlineStyleImg = 'float:left;clear:left;margin:6px 0';
+
+	/**
+	 * The inline CSS style for LABEL element
+	 *
+	 * @var    string
+	 * @since  2.0
+	 */
+	public $inlineStyleLabel = 'float:left;clear:none';
+
+	/**
+	 * The inline CSS style for INPUT element
+	 *
+	 * @var    string
+	 * @since  2.0
+	 */
+	public $inlineStyleInput = 'float:left;clear:left;width:auto';
 
 	/**
 	 * Method to get the field input markup for the file field.
@@ -53,10 +77,40 @@ class JFormFieldProfilePicture extends JFormField
 
 		if( !empty($this->value) ) {
 			$path = JURI::root().'media/plg_user_profilepicture/images/200/'.$this->value;
-			$profilepicture = '<img src="'.$path.'" style="float:left;clear:left;margin:6px 0" />';
-			
-			$remove_pp = '<input type="checkbox" id="'.$this->id.'remove" name="'.$this->name.'[remove]" value="'.$this->value.'" style="float:left;clear:left;width:auto" />';
-			$remove_pp .= '<label for="'.$this->id.'remove" style="float:left;clear:none">';
+
+			// <IMG> element
+			$profilepicture .= '<img src="'.$path.'" ';
+
+			if( !empty($this->inlineStyleImg) )
+			{
+				$profilepicture .= 'style="' . $this->inlineStyleImg . '" ';
+			}
+
+			$profilepicture .= '/>';
+
+			// <INPUT> element for removing profile picture
+			$remove_pp .= '<input type="checkbox" ';
+			$remove_pp .= 'id="'.$this->id.'remove" ';
+			$remove_pp .= 'name="'.$this->name.'[remove]" ';
+			$remove_pp .= 'value="'.$this->value.'" ';
+
+			if( !empty($this->inlineStyleInput) )
+			{
+				$remove_pp .= 'style="' . $this->inlineStyleInput . '" ';
+			}
+
+			$remove_pp .= '/>';
+
+			// <LABEL> element
+			$remove_pp .= '<label ';
+			$remove_pp .= 'for="'.$this->id.'remove" ';
+
+			if( !empty($this->inlineStyleLabel) )
+			{
+				$remove_pp .= 'style="' . $this->inlineStyleLabel . '" ';
+			}
+
+			$remove_pp .= '>';
 			$remove_pp .= JText::_('PLG_USER_PROFILEPICTURE_FIELD_PICTURE_REMOVE');
 			$remove_pp .= '</label>';
 		}
