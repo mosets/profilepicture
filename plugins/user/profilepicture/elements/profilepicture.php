@@ -3,7 +3,7 @@
  * @package     Mosets
  * @subpackage  Profile Picture
  *
- * @copyright   Copyright (C) 2012-presemt Mosets Consulting, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2012-present Mosets Consulting, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -150,6 +150,8 @@ class JFormFieldProfilePicture extends JFormField
 
 		$message = '<p>';
 		$message .= JText::sprintf('PLG_USER_PROFILEPICTURE_FIELD_MAXUPLOADSIZEINBYTES_MESSAGE', $this->maxUploadSizeInKB());
+		$message .= '<br>';
+		$message .= JText::_('PLG_USER_PROFILEPICTURE_FIELD_MINDIMENSION_MESSAGE');
 		$message .= '</p>';
 
 		return '<input type="file" name="' . $this->name . '" id="' . $this->id . '"' . ' value=""' . $accept . $disabled . $class . $size
