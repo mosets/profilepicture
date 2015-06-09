@@ -11,15 +11,15 @@ defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.filesystem.file');
 
-DEFINE('PROFILEPICTURE_PATH_50', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'50'.DS);
-DEFINE('PROFILEPICTURE_PATH_200', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'200'.DS);
-DEFINE('PROFILEPICTURE_PATH_ORIGINAL', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'original'.DS);
-DEFINE('PROFILEPICTURE_PATH_FILLER', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'filler'.DS);
+DEFINE('PROFILEPICTURE_PATH_50', JPATH_ROOT.'/media/plg_user_profilepicture/images/50/');
+DEFINE('PROFILEPICTURE_PATH_200', JPATH_ROOT.'/media/plg_user_profilepicture/images/200/');
+DEFINE('PROFILEPICTURE_PATH_ORIGINAL', JPATH_ROOT.'/media/plg_user_profilepicture/images/original/');
+DEFINE('PROFILEPICTURE_PATH_FILLER', JPATH_ROOT.'/media/plg_user_profilepicture/images/filler/');
 
-DEFINE('PROFILEPICTURE_SIZE_FILLER', 	'filler');
-DEFINE('PROFILEPICTURE_SIZE_ORIGINAL', 	'original');
-DEFINE('PROFILEPICTURE_SIZE_50', 	50);
-DEFINE('PROFILEPICTURE_SIZE_200', 	200);
+DEFINE('PROFILEPICTURE_SIZE_FILLER', 'filler');
+DEFINE('PROFILEPICTURE_SIZE_ORIGINAL', 'original');
+DEFINE('PROFILEPICTURE_SIZE_50', 50);
+DEFINE('PROFILEPICTURE_SIZE_200', 200);
 
 /**
  * Class to retrieve profile picture of a user
@@ -131,7 +131,7 @@ class ProfilePicture
 	 */
 	public function getFillerURL($size=PROFILEPICTURE_SIZE_200)
 	{
-		return JURI::root().'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.PROFILEPICTURE_SIZE_FILLER.DS.$size.'.png';
+		return JURI::root().'media/plg_user_profilepicture/images/'.PROFILEPICTURE_SIZE_FILLER.'/'.$size.'.png';
 	}
 	
 	/**
@@ -145,7 +145,7 @@ class ProfilePicture
 	{
 		if( $filename = $this->getFilename() )
 		{
-			return JURI::root().'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.$size.DS.$this->getFilename();
+			return JURI::root().'media/plg_user_profilepicture/images/'.$size.'/'.$this->getFilename();
 		} else {
 			return false;
 		}
@@ -162,7 +162,7 @@ class ProfilePicture
 	{
 		if( $filename = $this->getFilename() )
 		{
-			return JPATH_BASE.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.$size.DS.$this->getFilename();
+			return JPATH_BASE.'/media/plg_user_profilepicture/images/'.$size.'/'.$this->getFilename();
 		} else {
 			return false;
 		}
