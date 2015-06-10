@@ -13,15 +13,21 @@ How to use
 ----------
 It's super easy to use profile picture in your existing codes. Make sure to load the ProfilePicture library first:
 
-	jimport('profilepicture.profilepicture');
+```php
+jimport('profilepicture.profilepicture');
+```
 
 Create a ProfilePicture instance and pass the user ID:
 
-	$profilepicture = new ProfilePicture(1);
+```php
+$profilepicture = new ProfilePicture(1);
+```
 
 Use the **toHTML** method to output the IMG element for the user's profile picture. If profile picture for the user does not exists, the filler image will be shown:
 
-	echo $profilepicture->toHTML();
+```php
+echo $profilepicture->toHTML();
+```
 
 There are 3 sizes defined as constants in Profile Picture:
 + **PROFILEPICTURE_SIZE_ORIGINAL**
@@ -30,21 +36,27 @@ There are 3 sizes defined as constants in Profile Picture:
 	
 By default, **toHTML** will output using **PROFILEPICTURE_SIZE_200**. You may specify the profile picture size by passing the size constant to **toHTML** method:
 
-	echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_50);
+```php
+echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_50);
+```
 
 The toHTML method also allows you to specify the ALT attribute and additional attributes for the IMG element:
 
-	echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_50, 'Lee', ['class' => 'profile', 'id' => 'lee-profile-picture']);
+```php
+echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_50, 'Lee', ['class' => 'profile', 'id' => 'lee-profile-picture']);
+```
 
 Here's a full example that displays the currently logged in user's profile picture.
 
-	jimport('profilepicture.profilepicture');
+```php
+jimport('profilepicture.profilepicture');
 
-	$user = JFactory::getUser();
+$user = JFactory::getUser();
 
-	$profilepicture = new ProfilePicture($user->get('id'));
+$profilepicture = new ProfilePicture($user->get('id'));
 
-	echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200, $user->get('name'));
+echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200, $user->get('name'));
+```
 
 The library also includes the following methods: **getFillerURL**, **getURL**, **getPath** and **exists**. You can pass the size constant to refer to a specific size, otherwise it will defaults to **PROFILEPICTURE_SIZE_200**.
 
