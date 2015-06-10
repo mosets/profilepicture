@@ -75,7 +75,7 @@ class ProfilePicture
 	 */
 	public function setUserId($userId)
 	{
-		$this->userId = $id;
+		$this->userId = $userId;
 	}
 	
 	/**
