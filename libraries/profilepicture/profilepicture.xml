@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="library" version="1.0" method="upgrade">
-	<name>lib_mosets_profilepicture</name>
+	<name>lib_profilepicture</name>
 	<libraryname>mosets</libraryname>
-	<description>LIB_MOSETS_PROFILEPICTURE_XML_DESCRIPTION</description>
+	<description>LIB_PROFILEPICTURE_XML_DESCRIPTION</description>
 	<creationDate>June 2015</creationDate>
 	<author>Mosets Consulting</author>
 	<authorEmail>mtree@mosets.com</authorEmail>
@@ -13,7 +13,10 @@
 	<packager>Mosets Consulting</packager>
 	<packagerurl>http://www.mosets.com</packagerurl>
 	<updateservers>http://update.mosets.com/libraries/mosets_profilepicture/profilepicture.xml</updateservers>
-	<files>
+    <languages>
+        <language tag="en-GB">en-GB.lib_profilepicture.sys.ini</language>
+    </languages>
+    <files>
 		<folder>profilepicture</folder>
 	</files>
 </extension>
