@@ -3,7 +3,7 @@
  * @package     Mosets
  * @subpackage  ProfilePicture
  *
- * @copyright   Copyright (C) 2012 Mosets Consulting, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2012-present Mosets Consulting, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -121,11 +121,13 @@ class ProfilePicture
 			}			
 		}
 	}
-	
+
 	/**
 	 * Get the user's profile picture URL.
 	 *
-	 * @return  str		The profile picture URL.
+	 * @param int $size
+	 *
+	 * @return  str        The profile picture URL.
 	 *
 	 * @since   1.0
 	 */
@@ -133,11 +135,13 @@ class ProfilePicture
 	{
 		return JURI::root().'media/plg_user_profilepicture/images/'.PROFILEPICTURE_SIZE_FILLER.'/'.$size.'.png';
 	}
-	
+
 	/**
 	 * Get the user's profile picture URL.
 	 *
-	 * @return  str		The profile picture URL.
+	 * @param int $size
+	 *
+	 * @return  str        The profile picture URL.
 	 *
 	 * @since   1.0
 	 */
@@ -154,7 +158,9 @@ class ProfilePicture
 	/**
 	 * Get the user's profile picture path.
 	 *
-	 * @return  str		The profile picture path.
+	 * @param int $size
+	 *
+	 * @return  str        The profile picture path.
 	 *
 	 * @since   1.0
 	 */
@@ -171,11 +177,13 @@ class ProfilePicture
 	/**
 	 * Method to check if a profile picture of a certain size exists
 	 *
-	 * @param  string	The size of the profile picture to check
+	 * @param int $size
 	 *
-	 * @return  boolean	True if the profile picture exists
+	 * @internal param \The $string size of the profile picture to check
 	 *
-	 * @since   1.0
+	 * @return  boolean    True if the profile picture exists
+	 *
+	 * @since    1.0
 	 */
 	public function exists($size=PROFILEPICTURE_SIZE_200)
 	{
@@ -186,13 +194,13 @@ class ProfilePicture
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Render the IMG HTML element.
 	 *
-	 * @param  string	$size		The size of the rendered profile picture image
-	 * @param  string	$alt		The IMG element 'alt' attribute.
-	 * @param  array 	$attribs	Additional attributes to be inserted in to the rendered HTML
+	 * @param int $size    The size of the rendered profile picture image
+	 * @param string    $alt     The IMG element 'alt' attribute.
+	 * @param array     $attribs Additional attributes to be inserted in to the rendered HTML
 	 *
 	 * @return  string The rendered IMG element.
 	 *
