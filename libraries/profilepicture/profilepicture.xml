@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="library" version="1.0" method="upgrade">
-	<name>lib_profilepicture</name>
+	<name>Mosets Profile Picture</name>
 	<libraryname>mosets</libraryname>
 	<description>LIB_PROFILEPICTURE_XML_DESCRIPTION</description>
 	<creationDate>June 2015</creationDate>
