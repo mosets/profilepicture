@@ -17,6 +17,6 @@
         <language tag="en-GB">en-GB.lib_profilepicture.sys.ini</language>
     </languages>
     <files>
-		<folder>profilepicture</folder>
+		<filename>profilepicture.php</filename>
 	</files>
 </extension>

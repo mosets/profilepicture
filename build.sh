@@ -28,19 +28,22 @@ if [ -d "dist" ]; then
 	rm -rf dist
 fi
 
+# Zip plg_user_profilepicture plugin
 mkdir -p ${BASE}/${PLG}-${PLG_VERSION}
 cp -r plugins/user/profilepicture/* ${BASE}/${PLG}-${PLG_VERSION}
 cp -r media ${BASE}/${PLG}-${PLG_VERSION}/
 
-mkdir -p ${BASE}/${LIB}-${LIB_VERSION}/profilepicture
-cp ${LIB_CFG} ${BASE}/${LIB}-${LIB_VERSION}/
-cp libraries/profilepicture/profilepicture.php ${BASE}/${LIB}-${LIB_VERSION}/profilepicture/
-cp -r language/en-GB/en-GB.lib_profilepicture.sys.ini ${BASE}/${LIB}-${LIB_VERSION}/
-
 cd ${BASE}/${PLG}-${PLG_VERSION}
 zip -r ../${PLG}-${PLG_VERSION}.zip *
+
+# Zip lib_profilepicture library
+mkdir -p ${BASE}/${LIB}-${LIB_VERSION}
+cp $SRCPATH/libraries/profilepicture/* ${BASE}/${LIB}-${LIB_VERSION}/
+cp -r $SRCPATH/language/en-GB/en-GB.lib_profilepicture.sys.ini ${BASE}/${LIB}-${LIB_VERSION}/
+
 cd ${BASE}/${LIB}-${LIB_VERSION}
 zip -r ../${LIB}-${LIB_VERSION}.zip *
+
 cd ${BASE}
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > ${BASE}/pkg_profilepicture.xml
