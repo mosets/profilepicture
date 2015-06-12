@@ -63,7 +63,7 @@ The library also includes the following methods: **getFillerURL**, **getURL**, *
 Requirements
 ------------
 
-Joomla 3.6 and GD image library support for PHP.
+Joomla 3.4 and GD image library support for PHP.
 
 Author
 -------
