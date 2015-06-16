@@ -9,7 +9,7 @@
 	<authorUrl>http://www.mosets.com/</authorUrl>
 	<copyright>(C) 2012-present Mosets Consulting</copyright>
 	<license>MIT License</license>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	<packager>Mosets Consulting</packager>
 	<packagerurl>http://www.mosets.com</packagerurl>
 	<updateservers>http://update.mosets.com/libraries/mosets_profilepicture/profilepicture.xml</updateservers>
