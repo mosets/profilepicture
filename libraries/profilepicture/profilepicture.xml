@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="library" version="1.0" method="upgrade">
 	<name>Mosets Profile Picture</name>
-	<libraryname>mosets</libraryname>
+	<libraryname>profilepicture</libraryname>
 	<description>LIB_PROFILEPICTURE_XML_DESCRIPTION</description>
 	<creationDate>June 2015</creationDate>
 	<author>Mosets Consulting</author>
