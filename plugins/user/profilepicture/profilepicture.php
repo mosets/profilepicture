@@ -260,7 +260,6 @@ class plgUserProfilePicture extends JPlugin
 				$db = JFactory::getDbo();
 				$query	= $db->getQuery(true);
 
-				$query	= $db->getQuery(true);
 				$query->insert('#__user_profiles')
 					->columns('user_id, profile_key, profile_value, ordering')
 					->values(
