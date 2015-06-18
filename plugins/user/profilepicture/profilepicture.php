@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright	Copyright (C) 2012 Mosets Consulting, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2012-present Mosets Consulting, Inc. All rights reserved.
  * @license	GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -290,9 +290,11 @@ class plgUserProfilePicture extends JPlugin
 	 *
 	 * Method is called after user data is deleted from the database
 	 *
-	 * @param	array		$user		Holds the user data
-	 * @param	boolean		$success	True if user was succesfully stored in the database
-	 * @param	string		$msg		Message
+	 * @param    array   $user    Holds the user data
+	 * @param    boolean $success True if user was succesfully stored in the database
+	 * @param    string  $msg     Message
+	 *
+	 * @return bool
 	 */
 	function onUserAfterDelete($user, $success, $msg)
 	{
@@ -304,15 +306,16 @@ class plgUserProfilePicture extends JPlugin
 
 		return $this->removeProfilePicture($userId);
 	}
-	
+
 	/**
 	 * Remove profile picture's file and table record
 	 *
-	 * @param	int	$userId		User ID
-	 * 
-	 * @return 	boolean	true if successfully removed profile picture.
-	 * 			false if failed or there is no profile picture 
-	 * 			to remove.
+	 * @param    int $userId User ID
+	 *
+	 * @throws Exception
+	 * @return    boolean    true if successfully removed profile picture.
+	 *            false if failed or there is no profile picture
+	 *            to remove.
 	 */
 	function removeProfilePicture($userId)
 	{
@@ -372,4 +375,3 @@ class plgUserProfilePicture extends JPlugin
 		return true;
 	}
 }
-?>
