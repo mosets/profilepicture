@@ -149,13 +149,41 @@ class JFormFieldProfilePicture extends JFormField
 		}
 
 		$message = '<p>';
+
+		if ( !$this->isProfilePictureLibraryEnabled() )
+		{
+			$message .= '<span class="text-warning">';
+			$message .= JText::_('PLG_USER_PROFILEPICTURE_FIELD_ERROR_LIBRARY_NOT_LOADED');
+			$message .= '</span>';
+			$message .= '<br>';
+		}
+
 		$message .= JText::sprintf('PLG_USER_PROFILEPICTURE_FIELD_MAXUPLOADSIZEINBYTES_MESSAGE', $this->maxUploadSizeInKB());
 		$message .= '<br>';
 		$message .= JText::_('PLG_USER_PROFILEPICTURE_FIELD_MINDIMENSION_MESSAGE');
 		$message .= '</p>';
 
-		return '<input type="file" name="' . $this->name . '" id="' . $this->id . '"' . ' value=""' . $accept . $disabled . $class . $size
-			. $onchange . ' />'.$message.$profilepicture.$remove_pp;
+		$return = '<input type="file" name="' . $this->name . '" id="' . $this->id . '"' . ' value=""' . $accept . $disabled . $class . $size
+			. $onchange;
+		$return .= (!$this->isProfilePictureLibraryEnabled()) ? 'disabled ' : '';
+		$return .= ' />'.$message.$profilepicture.$remove_pp;
+
+		return $return;
+	}
+
+
+	/**
+	 * Check if the Profile Picture library is enabled
+	 *
+	 * @return bool
+	 */
+	protected function isProfilePictureLibraryEnabled()
+	{
+		if ( JLibraryHelper::isEnabled( 'profilepicture' ) )
+		{
+			return true;
+		}
+		return false;
 	}
 
 	/**
