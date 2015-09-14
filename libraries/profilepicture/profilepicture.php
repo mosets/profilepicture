@@ -168,7 +168,7 @@ class ProfilePicture
 	{
 		if( $filename = $this->getFilename() )
 		{
-			return JPATH_BASE.'/media/plg_user_profilepicture/images/'.$size.'/'.$this->getFilename();
+			return JPATH_SITE.'/media/plg_user_profilepicture/images/'.$size.'/'.$this->getFilename();
 		} else {
 			return false;
 		}
