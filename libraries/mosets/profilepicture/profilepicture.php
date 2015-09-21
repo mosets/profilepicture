@@ -3,7 +3,7 @@
  * @package     Mosets
  * @subpackage  ProfilePicture
  *
- * @copyright   Copyright (C) 2012 Mosets Consulting, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2012-present Mosets Consulting, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -11,15 +11,15 @@ defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.filesystem.file');
 
-DEFINE('PROFILEPICTURE_PATH_50', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'50'.DS);
-DEFINE('PROFILEPICTURE_PATH_200', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'200'.DS);
-DEFINE('PROFILEPICTURE_PATH_ORIGINAL', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'original'.DS);
-DEFINE('PROFILEPICTURE_PATH_FILLER', 	JPATH_ROOT.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.'filler'.DS);
+DEFINE('PROFILEPICTURE_PATH_50', JPATH_ROOT.'/media/plg_user_profilepicture/images/50/');
+DEFINE('PROFILEPICTURE_PATH_200', JPATH_ROOT.'/media/plg_user_profilepicture/images/200/');
+DEFINE('PROFILEPICTURE_PATH_ORIGINAL', JPATH_ROOT.'/media/plg_user_profilepicture/images/original/');
+DEFINE('PROFILEPICTURE_PATH_FILLER', JPATH_ROOT.'/media/plg_user_profilepicture/images/filler/');
 
-DEFINE('PROFILEPICTURE_SIZE_FILLER', 	'filler');
-DEFINE('PROFILEPICTURE_SIZE_ORIGINAL', 	'original');
-DEFINE('PROFILEPICTURE_SIZE_50', 	50);
-DEFINE('PROFILEPICTURE_SIZE_200', 	200);
+DEFINE('PROFILEPICTURE_SIZE_FILLER', 'filler');
+DEFINE('PROFILEPICTURE_SIZE_ORIGINAL', 'original');
+DEFINE('PROFILEPICTURE_SIZE_50', 50);
+DEFINE('PROFILEPICTURE_SIZE_200', 200);
 
 /**
  * Class to retrieve profile picture of a user
@@ -75,7 +75,7 @@ class ProfilePicture
 	 */
 	public function setUserId($userId)
 	{
-		$this->userId = $id;
+		$this->userId = $userId;
 	}
 	
 	/**
@@ -121,23 +121,27 @@ class ProfilePicture
 			}			
 		}
 	}
-	
+
 	/**
 	 * Get the user's profile picture URL.
 	 *
-	 * @return  str		The profile picture URL.
+	 * @param int $size
+	 *
+	 * @return  str        The profile picture URL.
 	 *
 	 * @since   1.0
 	 */
 	public function getFillerURL($size=PROFILEPICTURE_SIZE_200)
 	{
-		return JURI::root().'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.PROFILEPICTURE_SIZE_FILLER.DS.$size.'.png';
+		return JURI::root().'media/plg_user_profilepicture/images/'.PROFILEPICTURE_SIZE_FILLER.'/'.$size.'.png';
 	}
-	
+
 	/**
 	 * Get the user's profile picture URL.
 	 *
-	 * @return  str		The profile picture URL.
+	 * @param int $size
+	 *
+	 * @return  str        The profile picture URL.
 	 *
 	 * @since   1.0
 	 */
@@ -145,7 +149,7 @@ class ProfilePicture
 	{
 		if( $filename = $this->getFilename() )
 		{
-			return JURI::root().'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.$size.DS.$this->getFilename();
+			return JURI::root().'media/plg_user_profilepicture/images/'.$size.'/'.$this->getFilename();
 		} else {
 			return false;
 		}
@@ -154,7 +158,9 @@ class ProfilePicture
 	/**
 	 * Get the user's profile picture path.
 	 *
-	 * @return  str		The profile picture path.
+	 * @param int $size
+	 *
+	 * @return  str        The profile picture path.
 	 *
 	 * @since   1.0
 	 */
@@ -162,7 +168,7 @@ class ProfilePicture
 	{
 		if( $filename = $this->getFilename() )
 		{
-			return JPATH_BASE.DS.'media'.DS.'plg_user_profilepicture'.DS.'images'.DS.$size.DS.$this->getFilename();
+			return JPATH_SITE.'/media/plg_user_profilepicture/images/'.$size.'/'.$this->getFilename();
 		} else {
 			return false;
 		}
@@ -171,11 +177,13 @@ class ProfilePicture
 	/**
 	 * Method to check if a profile picture of a certain size exists
 	 *
-	 * @param  string	The size of the profile picture to check
+	 * @param int $size
 	 *
-	 * @return  boolean	True if the profile picture exists
+	 * @internal param \The $string size of the profile picture to check
 	 *
-	 * @since   1.0
+	 * @return  boolean    True if the profile picture exists
+	 *
+	 * @since    1.0
 	 */
 	public function exists($size=PROFILEPICTURE_SIZE_200)
 	{
@@ -186,13 +194,13 @@ class ProfilePicture
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Render the IMG HTML element.
 	 *
-	 * @param  string	$size		The size of the rendered profile picture image
-	 * @param  string	$alt		The IMG element 'alt' attribute.
-	 * @param  array 	$attribs	Additional attributes to be inserted in to the rendered HTML
+	 * @param int $size    The size of the rendered profile picture image
+	 * @param string    $alt     The IMG element 'alt' attribute.
+	 * @param array     $attribs Additional attributes to be inserted in to the rendered HTML
 	 *
 	 * @return  string The rendered IMG element.
 	 *
@@ -215,4 +223,3 @@ class ProfilePicture
 		return $html;
 	}
 }
-?>
