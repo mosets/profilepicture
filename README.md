@@ -14,7 +14,7 @@ How to use
 It's super easy to use profile picture in your existing codes. Make sure to load the ProfilePicture library first:
 
 ```php
-jimport('profilepicture.profilepicture');
+jimport('mosets.profilepicture.profilepicture');
 ```
 
 Create a ProfilePicture instance and pass the user ID:
@@ -49,7 +49,7 @@ echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_50, 'Lee', ['class' => 'profile
 Here's a full example that displays the currently logged in user's profile picture.
 
 ```php
-jimport('profilepicture.profilepicture');
+jimport('mosets.profilepicture.profilepicture');
 
 $user = JFactory::getUser();
 
