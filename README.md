@@ -57,6 +57,23 @@ $profilepicture = new ProfilePicture($user->get('id'));
 
 echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200, $user->get('name'));
 ```
+Another example with an author.php override
+
+```php
+<?php jimport('mosets.profilepicture.profilepicture');?>
+<dd class="createdby" itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<?php $author = ($displayData['item']->created_by_alias ? $displayData['item']->created_by_alias : $displayData['item']->author); ?>
+	<?php $authorSpan = '<span itemprop="name">' . $author . '</span>'; ?>
+	<?php if (!empty($displayData['item']->contact_link ) && $displayData['params']->get('link_author') == true) : ?>
+		<?php echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200,$author,['title' => $author]);?>
+		<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', JHtml::_('link', $displayData['item']->contact_link, $authorSpan, array('itemprop' => 'url'))); ?>
+	<?php else :?>
+		<?php echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200,$author,['title' => $author]);?>
+		<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $authorSpan); ?>
+	<?php endif; ?>
+</dd>
+
+```
 
 The library also includes the following methods: **getFillerURL**, **getURL**, **getPath** and **exists**. You can pass the size constant to refer to a specific size, otherwise it will defaults to **PROFILEPICTURE_SIZE_200**.
 
