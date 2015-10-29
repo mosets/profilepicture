@@ -14,7 +14,7 @@ How to use
 It's super easy to use profile picture in your existing codes. Make sure to load the ProfilePicture library first:
 
 ```php
-jimport('mosets.profilepicture.profilepicture');
+jimport('profilepicture.profilepicture');
 ```
 
 Create a ProfilePicture instance and pass the user ID:
@@ -60,7 +60,7 @@ echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200, $user->get('name'));
 Another example with an author.php override
 
 ```php
-<?php jimport('mosets.profilepicture.profilepicture');?>
+<?php jimport('profilepicture.profilepicture');?>
 <dd class="createdby" itemprop="author" itemscope itemtype="http://schema.org/Person">
 	<?php $author = ($displayData['item']->created_by_alias ? $displayData['item']->created_by_alias : $displayData['item']->author); ?>
 	<?php $authorSpan = '<span itemprop="name">' . $author . '</span>'; ?>
