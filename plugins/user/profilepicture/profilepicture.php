@@ -7,7 +7,7 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.image.image');
-jimport('mosets.profilepicture.profilepicture');
+jimport('profilepicture.profilepicture');
 
 /**
  * Mosets Profile Picture Plugin.
