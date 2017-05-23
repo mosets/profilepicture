@@ -49,13 +49,30 @@ echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_50, 'Lee', ['class' => 'profile
 Here's a full example that displays the currently logged in user's profile picture.
 
 ```php
-jimport('profilepicture.profilepicture');
+jimport('mosets.profilepicture.profilepicture');
 
 $user = JFactory::getUser();
 
 $profilepicture = new ProfilePicture($user->get('id'));
 
 echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200, $user->get('name'));
+```
+Another example with an author.php override
+
+```php
+<?php jimport('profilepicture.profilepicture');?>
+<dd class="createdby" itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<?php $author = ($displayData['item']->created_by_alias ? $displayData['item']->created_by_alias : $displayData['item']->author); ?>
+	<?php $authorSpan = '<span itemprop="name">' . $author . '</span>'; ?>
+	<?php if (!empty($displayData['item']->contact_link ) && $displayData['params']->get('link_author') == true) : ?>
+		<?php echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200,$author,['title' => $author]);?>
+		<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', JHtml::_('link', $displayData['item']->contact_link, $authorSpan, array('itemprop' => 'url'))); ?>
+	<?php else :?>
+		<?php echo $profilepicture->toHTML(PROFILEPICTURE_SIZE_200,$author,['title' => $author]);?>
+		<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $authorSpan); ?>
+	<?php endif; ?>
+</dd>
+
 ```
 
 The library also includes the following methods: **getFillerURL**, **getURL**, **getPath** and **exists**. You can pass the size constant to refer to a specific size, otherwise it will defaults to **PROFILEPICTURE_SIZE_200**.
