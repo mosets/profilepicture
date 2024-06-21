@@ -3,13 +3,13 @@
 	<name>Mosets Profile Picture</name>
 	<libraryname>profilepicture</libraryname>
 	<description>LIB_PROFILEPICTURE_XML_DESCRIPTION</description>
-	<creationDate>October 2015</creationDate>
+	<creationDate>June 2024</creationDate>
 	<author>Mosets Consulting</author>
 	<authorEmail>mtree@mosets.com</authorEmail>
 	<authorUrl>http://www.mosets.com/</authorUrl>
-	<copyright>(C) 2012-present Mosets Consulting</copyright>
+	<copyright>(C) 2024-present Mosets Consulting</copyright>
 	<license>MIT License</license>
-	<version>2.0.2</version>
+	<version>3.0.0</version>
 	<packager>Mosets Consulting</packager>
 	<packagerurl>http://www.mosets.com</packagerurl>
 	<updateservers>http://update.mosets.com/libraries/mosets_profilepicture/profilepicture.xml</updateservers>

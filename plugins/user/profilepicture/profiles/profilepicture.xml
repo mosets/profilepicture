@@ -7,9 +7,9 @@
 		>
 			<field
 				name="file" 
-		        	type="profilepicture"
+		        type="profilepicture"
 				id="file"
-				description="PLG_USER_PROFILEPICTURE_FIELD_PICTURE_DESC"
+				description=""
 				filter=""
 				label="PLG_USER_PROFILEPICTURE_FIELD_PICTURE_LABEL"
 				message="PLG_USER_PROFILEPICTURE_FIELD_PICTURE_MESSAGE"

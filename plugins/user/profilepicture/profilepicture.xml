@@ -2,12 +2,12 @@
 <extension version="1.0" type="plugin" group="user" method="upgrade">
 	<name>PLG_USER_PROFILEPICTURE</name>
 	<author>Mosets Consulting</author>
-	<creationDate>November 2015</creationDate>
-	<copyright>(C) 2012-present Mosets Consulting. All rights reserved.</copyright>
+	<creationDate>June 2024</creationDate>
+	<copyright>(C) 2024-present Mosets Consulting. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>mtree@mosets.com</authorEmail>
 	<authorUrl>www.mosets.com</authorUrl>
-	<version>2.0.3</version>
+	<version>3.0.0</version>
 	<description>PLG_USER_PROFILEPICTURE_XML_DESCRIPTION</description>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.plg_user_profilepicture.ini</language>

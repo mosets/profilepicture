@@ -4,6 +4,10 @@
  * @license	GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+use Joomla\Utilities\ArrayHelper;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Factory;
+
 defined('JPATH_BASE') or die;
 
 jimport('joomla.image.image');
@@ -76,12 +80,12 @@ class plgUserProfilePicture extends JPlugin
 			$query->where('profile_key = '.$db->quote(plgUserProfilePicture::PROFILE_KEY));
 			$db->setQuery($query);
 			
-			$result = $db->loadResult();
-
-			// Check for a database error.
-			if ($db->getErrorNum())
+			try {
+				$result = $db->loadResult();
+			}
+			catch (RuntimeException $e)
 			{
-				$this->_subject->setError($db->getErrorMsg());
+				$this->_subject->setError($e->getMessage());
 				return false;
 			}
 
@@ -154,23 +158,30 @@ class plgUserProfilePicture extends JPlugin
 
 	function onUserAfterSave($data, $isNew, $result, $error)
 	{
-		$userId	= JArrayHelper::getValue($data, 'id', 0, 'int');
-		$files	= JRequest::getVar( 'jform', null, 'files');
-		$post	= JRequest::getVar( 'jform', null);
+		$input = JFactory::getApplication()->input;
 
+		$uri = Uri::getInstance();
+
+		$userId	= ArrayHelper::getValue($data, 'id', 0, 'int');
+		$files	= $input->files->get( 'jform', null, 'files');
+		$post	= $input->post->get( 'jform', null);
+		// echo '<pre>';
+// var_dump($files);
+// exit();
 		$savedNewProfilePicture = false;
 
 		// Save original picture, resized pictures and save them
-		if( $files['error']['profilepicture']['file'] == 0 && !empty($files['tmp_name']['profilepicture']['file']) )
+		if( $files['profilepicture']['file']['error'] == 0 && !empty($files['profilepicture']['file']['tmp_name']) )
+		// if( $files['error']['profilepicture']['file'] == 0 && !empty($files['tmp_name']['profilepicture']['file']) )
 		{
 
 			// Throw new exception if the uploaded file exceed the maximum allowed file size.
-			if ( $this->doesExceedFileSizeLimit($files['size']['profilepicture']['file']) )
+			if ( $this->doesExceedFileSizeLimit($files['profilepicture']['file']['size']) )
 			{
 				throw new Exception(JText::sprintf('PLG_USER_PROFILEPICTURE_ERROR_FILE_SIZE_TOO_BIG', ($this->maxUploadSizeInBytes()/1000)));
 			}
 
-			$profilepicture = new JImage($files['tmp_name']['profilepicture']['file']);
+			$profilepicture = new JImage($files['profilepicture']['file']['tmp_name']);
 			$sourceWidth = $profilepicture->getWidth();
 			$sourceHeight = $profilepicture->getHeight();
 			
@@ -269,9 +280,10 @@ class plgUserProfilePicture extends JPlugin
 						.' 1');
 				$db->setQuery($query);
 
-				if (!$db->query())
-				{
-					throw new Exception($db->getErrorMsg());
+				try {
+					$db->execute();
+				} catch (Exception $e) {
+					throw new Exception($e->getMessage());
 				}
 			}
 			
@@ -302,7 +314,7 @@ class plgUserProfilePicture extends JPlugin
 			return false;
 		}
 
-		$userId	= JArrayHelper::getValue($user, 'id', 0, 'int');
+		$userId	= ArrayHelper::getValue($user, 'id', 0, 'int');
 
 		return $this->removeProfilePicture($userId);
 	}
@@ -354,10 +366,11 @@ class plgUserProfilePicture extends JPlugin
 						->where('profile_key = '.$db->quote(plgUserProfilePicture::PROFILE_KEY));
 					$db->setQuery($query);
 
-					if (!$db->query())
-					{
-						throw new Exception($db->getErrorMsg());
-					}					
+					try {
+						$db->execute();
+					} catch (Exception $e) {
+						throw new Exception($e->getMessage());
+					}
 				}
 				else
 				{
