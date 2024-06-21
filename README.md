@@ -11,6 +11,10 @@ This is the main plugin that allows your users to upload, remove and change thei
 + **Profile Picture Library** - 
 Profile Picture library provides API for third party developers to access and display users' profile picture.
 
+## Download
+
+[Download Profile Picture Plugin for Joomla 5](https://github.com/mosets/profilepicture/releases/download/3.0.0/pkg_profilepicture-3.0.0.zip)
+
 How to use
 ----------
 It's super easy to use profile picture in your existing codes. Make sure to load the ProfilePicture library first:
@@ -72,8 +76,9 @@ Author
 
 **CY Lee**
 
-+ http://twitter.com/cheryeong
-+ http://github.com/cheryeong
++ https://mosets.com
++ https://x.com/cheryeong
++ https://github.com/cheryeong
 
 Copyright and license
 ---------------------
