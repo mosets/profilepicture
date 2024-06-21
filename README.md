@@ -65,7 +65,7 @@ The library also includes the following methods: **getFillerURL**, **getURL**, *
 Requirements
 ------------
 
-Joomla 3.4 and GD image library support for PHP.
+Joomla 5 and GD image library support for PHP.
 
 Author
 -------
@@ -78,7 +78,7 @@ Author
 Copyright and license
 ---------------------
 
-Copyright (c) 2012-present Mosets Consulting
+Copyright (c) 2024-present Mosets Consulting
 
 Licensed under the MIT License.
 
