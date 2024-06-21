@@ -1,6 +1,8 @@
+.DS_Store
 /.gitignore
 /.htaccess
 /administrator
+/api
 /components
 /dist
 /images
