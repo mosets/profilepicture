@@ -1,4 +1,4 @@
-![Uploading mosets-profilepicture.jpeg…]()
+![55784cf84644c_resizeDown1200px525px16](https://github.com/mosets/profilepicture/assets/1192565/60dc0934-fb54-443a-b003-5c552ebe0033)
 
 Profile Picture
 ===============
