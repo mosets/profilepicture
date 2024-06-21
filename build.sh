@@ -13,13 +13,13 @@ git archive --format=tar HEAD | (cd $SRCPATH && tar xf -)
 cd $SRCPATH
 
 # Plugin version
-PLG_VERSION=`xpath $PLG_CFG extension/version`
+PLG_VERSION=`xpath -q -e extension/version $PLG_CFG`
 PLG_VERSION=${PLG_VERSION#<version>}
 PLG_VERSION=${PLG_VERSION%</version>}
 printf %s\\n "Plugin version is $PLG_VERSION"
 
 # Library version
-LIB_VERSION=`xpath $LIB_CFG extension/version`
+LIB_VERSION=`xpath -q -e extension/version $LIB_CFG`
 LIB_VERSION=${LIB_VERSION#<version>}
 LIB_VERSION=${LIB_VERSION%</version>}
 printf %s\\n "Library version is $LIB_VERSION"
@@ -34,7 +34,7 @@ cp -r plugins/user/profilepicture/* ${BASE}/${PLG}-${PLG_VERSION}
 cp -r media ${BASE}/${PLG}-${PLG_VERSION}/
 
 cd ${BASE}/${PLG}-${PLG_VERSION}
-zip -r ../${PLG}-${PLG_VERSION}.zip *
+zip -qr ../${PLG}-${PLG_VERSION}.zip *
 
 # Zip lib_profilepicture library
 mkdir -p ${BASE}/${LIB}-${LIB_VERSION}
@@ -42,7 +42,7 @@ cp $SRCPATH/libraries/profilepicture/* ${BASE}/${LIB}-${LIB_VERSION}/
 cp -r $SRCPATH/language/en-GB/en-GB.lib_profilepicture.sys.ini ${BASE}/${LIB}-${LIB_VERSION}/
 
 cd ${BASE}/${LIB}-${LIB_VERSION}
-zip -r ../${LIB}-${LIB_VERSION}.zip *
+zip -qr ../${LIB}-${LIB_VERSION}.zip *
 
 cd ${BASE}
 
@@ -64,7 +64,7 @@ echo "		<file type=\"plugin\" id=\"profilepicture\" group=\"user\">plg_user_prof
 echo "	</files>" >> ${BASE}/pkg_profilepicture.xml
 echo "</extension>" >> ${BASE}/pkg_profilepicture.xml
 
-zip ../pkg_profilepicture-${PLG_VERSION}.zip plg_user_profilepicture-${PLG_VERSION}.zip lib_profilepicture-${LIB_VERSION}.zip pkg_profilepicture.xml
+zip -q ../pkg_profilepicture-${PLG_VERSION}.zip plg_user_profilepicture-${PLG_VERSION}.zip lib_profilepicture-${LIB_VERSION}.zip pkg_profilepicture.xml
 cd ..
 
 printf \\n%s\\n\\n "Your package was successfuly packaged here: ${BASE}/pkg_profilepicture-${PLG_VERSION}.zip"
